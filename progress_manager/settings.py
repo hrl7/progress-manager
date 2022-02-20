@@ -23,7 +23,7 @@ env = os.environ.get("ENV", "development")
 if env == "production":
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
-    ALLOWED_HOSTS = ["https://progress-manager.herokuapp.com/"]
+    ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
     DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
 else:
