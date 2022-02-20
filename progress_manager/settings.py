@@ -11,21 +11,41 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+env = os.environ.get("ENV", "development")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)lvftqjole!oqov4!57yw8@q5^*t^bnlg_e96wk1gv*6ubn(*6"
+if env == "production":
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    DEBUG = False
+    ALLOWED_HOSTS = ["https://progress-manager.herokuapp.com/"]
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+else:
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-ALLOWED_HOSTS = []
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = "django-insecure-)lvftqjole!oqov4!57yw8@q5^*t^bnlg_e96wk1gv*6ubn(*6"
+
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+
+    ALLOWED_HOSTS = []
+    # Database
+    # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Application definition
@@ -69,17 +89,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "progress_manager.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
