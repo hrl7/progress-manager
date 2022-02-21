@@ -18,6 +18,17 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+
 env = os.environ.get("ENV", "development")
 
 if env == "production":
@@ -30,7 +41,10 @@ if env == "production":
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     STATIC_URL = "/static/"
     # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+    # STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+    MIDDLEWARE.append(
+        "whitenoise.middleware.WhiteNoiseMiddleware",
+    )
 else:
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -69,15 +83,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
 
 ROOT_URLCONF = "progress_manager.urls"
 
