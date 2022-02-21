@@ -26,6 +26,11 @@ if env == "production":
     ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
     DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
+    # https://devcenter.heroku.com/ja/articles/django-assets
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATIC_URL = "/static/"
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 else:
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -46,6 +51,10 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+    STATIC_URL = "static/"
 
 
 # Application definition
@@ -121,11 +130,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
