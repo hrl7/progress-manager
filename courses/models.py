@@ -23,7 +23,7 @@ class Challenge(models.Model):
     order = models.IntegerField()
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.order}. {self.title}"
 
     class Meta:
         constraints = [
@@ -45,7 +45,7 @@ class Step(models.Model):
     updated_at = models.DateTimeField("date updated", null=True)
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.order}. {self.title}"
 
     class Meta:
         constraints = [

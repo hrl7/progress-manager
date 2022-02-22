@@ -1,1 +1,14 @@
-{{ course }}
+<h1>
+{{ course.title }}
+</h1>
+
+<h2>Challenges</h2>
+<ol>
+    {% for challenge in course.challenges  %}
+        <li>
+            <a href="{% url 'challenge_detail' challenge.id %}">
+                {{ challenge.title }} - {{ challenge.step_set.count }} steps
+            </a>
+        </li>
+    {% endfor %}
+</ol>
