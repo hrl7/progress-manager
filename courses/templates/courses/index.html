@@ -1,9 +1,16 @@
+{% extends 'courses/base.html' %}
+
+{% block content %}
+
+<h1>Courses</h1>
 {% if courses %}
-    <ul>
-        {% for course in courses %}
-            <li><a href="/courses/{{ course.id }}">{{ course.title }}</a></li>
-        {% endfor %}
-    </ul>
+<ol class="card-list">
+    {% for course in courses %}
+    <li><a href="/courses/{{ course.id }}">{{ course.title }}</a></li>
+    {% endfor %}
+</ol>
 {% else %}
-    <p>no courses</p>
+<p>no courses</p>
 {%endif%}
+
+{% endblock %}

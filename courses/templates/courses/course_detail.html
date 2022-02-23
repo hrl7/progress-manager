@@ -1,14 +1,18 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+
 <h1>
-{{ course.title }}
+    {{ course.title }}
 </h1>
 
-<h2>Challenges</h2>
-<ol>
-    {% for challenge in course.challenges  %}
-        <li>
-            <a href="{% url 'challenge_detail' challenge.id %}">
-                {{ challenge.title }} - {{ challenge.step_set.count }} steps
-            </a>
-        </li>
+<ol class="card-list">
+    {% for challenge in course.challenges %}
+    <li>
+        <a href="{% url 'challenge_detail' challenge.id %}">
+            {{ challenge.title }} - {{ challenge.step_set.count }} steps
+        </a>
+    </li>
     {% endfor %}
 </ol>
+
+{% endblock %}

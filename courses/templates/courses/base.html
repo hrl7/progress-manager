@@ -1,0 +1,37 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Progress Manager</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="fixed-bg"></div>
+
+    <nav class="navbar">
+        <h1 class="logo"><a href="/">Progress Manager</a></h1>
+        <div>
+            {% if not user.is_anonymous %}
+            <a href="/">
+                {{user}}
+            </a>
+            {% else %}
+            <a href="/login">
+                login
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+
+</html>
